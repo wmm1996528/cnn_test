@@ -10,7 +10,7 @@ for i in range(10):
 import tensorflow as tf
 import numpy as np
 from PIL import Image
-from conf.sample import sample_conf
+import json
 from cnnlib.network import CNN
 
 
@@ -61,6 +61,8 @@ class Recognizer(CNN):
 
 
 def main():
+    with open("conf/sample_config.json", "r") as f:
+        sample_conf = json.load(f)
     image_height = sample_conf["image_height"]
     image_width = sample_conf["image_width"]
     max_captcha = sample_conf["max_captcha"]
