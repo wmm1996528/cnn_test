@@ -167,6 +167,7 @@ class TrainModel(CNN):
             tf.summary.FileWriter("logs/", sess.graph)
 
             step = 1
+            t1 = time.time()
             for i in range(self.cycle_stop):
                 batch_x, batch_y = self.get_batch(i, size=128)
                 # 梯度下降训练
@@ -197,6 +198,9 @@ class TrainModel(CNN):
                         saver.save(sess, self.model_save_dir)
                         print("验证集准确率达到99%，保存模型成功")
                         break
+
+                print(time.time() - t1)
+                t1 = time.time()
                 # 每训练500轮就保存一次
                 if i % self.cycle_save == 0:
                     saver.save(sess, self.model_save_dir)
