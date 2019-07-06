@@ -173,7 +173,7 @@ class TrainModel(CNN):
                 # 梯度下降训练
                 _, cost_ = sess.run([optimizer, cost],
                                     feed_dict={self.X: batch_x, self.Y: batch_y, self.keep_prob: 0.75})
-                if step % 10 == 0:
+                if step % 100 == 0:
                     # 基于训练集的测试
                     batch_x_test, batch_y_test = self.get_batch(i, size=100)
                     acc_char = sess.run(accuracy_char_count, feed_dict={self.X: batch_x_test, self.Y: batch_y_test, self.keep_prob: 1.})
@@ -198,14 +198,15 @@ class TrainModel(CNN):
                         saver.save(sess, self.model_save_dir)
                         print("验证集准确率达到99%，保存模型成功")
                         break
+                    print(time.time() - t1)
+                    t1 = time.time()
 
-                print(time.time() - t1)
-                t1 = time.time()
                 # 每训练500轮就保存一次
                 if i % self.cycle_save == 0:
                     saver.save(sess, self.model_save_dir)
                     print("定时保存模型成功")
                 step += 1
+
             saver.save(sess, self.model_save_dir)
 
     def recognize_captcha(self):
