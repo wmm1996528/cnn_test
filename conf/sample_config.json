@@ -16,6 +16,6 @@
   "remote_url": "http://127.0.0.1:6100/captcha/",
   "cycle_stop": 100000,
   "acc_stop": 0.99,
-  "cycle_save": 500,
+  "cycle_save": 5000,
   "enable_gpu": 1
 }
